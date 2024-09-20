@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagement.Application.DTO;
 using TaskManagement.Domain.Entities;
 
 namespace TaskManagement.Application.Interfaces
@@ -11,8 +12,8 @@ namespace TaskManagement.Application.Interfaces
     {
         Task<List<Company>> GetCompaniesAsync();
         Task<Company> GetCompanyAsync(int id);
-        Task<Company> AddCompanyAsync(Company company);
-        // Other company-specific operations
+        //Task<Company> AddCompanyAsync(Company company);
+        Task<Company> CreateCompanyAsync(CompanyDto companyDto, User adminUser);
     }
 
 }

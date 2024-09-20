@@ -10,7 +10,8 @@ namespace TaskManagement.Domain.Interfaces
     public interface ICompanyRepository : IRepository<Company>
     {
         Task<List<Project>> GetProjectsByCompanyIdAsync(int companyId);
-        // Additional company-specific operations
+        Task<Company> CreateCompanyAsync(Company company);
+        Task<bool> AnyAsync(System.Linq.Expressions.Expression<Func<Company, bool>> predicate);
     }
 
 }

@@ -15,6 +15,7 @@ namespace TaskManagement.Domain.Entities
         public DateTime ActiveUntil { get; set; }
         public List<Project> Projects { get; set; }
         public List<User> Users { get; set; }
+        public int AdminUserId { get; set; } // Administrator user ID for this company
+        public TimeSpan ActiveDuration { get; set; }
     }
-
 }

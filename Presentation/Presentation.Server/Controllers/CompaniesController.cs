@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TaskManagement.Application.DTO;
 using TaskManagement.Application.Interfaces;
 using TaskManagement.Domain.Entities;
 using TaskManagement.Domain.Enums;
@@ -11,13 +13,13 @@ namespace TaskManagement.Server.Controllers
     public class CompaniesController : ControllerBase
     {
         private readonly ICompanyService _companyService;
+        private readonly IUserService _userService; // Declare the user service
 
-        public CompaniesController(ICompanyService companyService)
+        public CompaniesController(ICompanyService companyService, IUserService userService)
         {
             _companyService = companyService;
+            _userService = userService; // Inject the user service
         }
-
-        
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Company>> GetCompany(int id)
@@ -29,13 +31,37 @@ namespace TaskManagement.Server.Controllers
             }
             return Ok(company);
         }
-
         [HttpPost]
-        public async Task<ActionResult<Company>> AddCompany(Company company)
+        public async Task<IActionResult> CreateCompany([FromBody] CompanyDto companyDto)
         {
-            var newCompany = await _companyService.AddCompanyAsync(company);
-            return CreatedAtAction(nameof(GetCompany), new { id = newCompany.Id }, newCompany);
+            // Assuming you have a way to get the logged-in admin user's ID (e.g., from claims or session)
+            int adminUserId = int.Parse(User.FindFirst("UserId").Value); // Example of fetching user ID from claims
+            var adminUser = await _userService.GetUserByIdAsync(adminUserId); // Use a user service instead of context
+
+            if (adminUser == null || !adminUser.IsAdmin)
+            {
+                return Unauthorized("Only admin users can create companies.");
+            }
+
+            try
+            {
+                // Use the company service to create the company
+                var company = await _companyService.CreateCompanyAsync(companyDto, adminUser);
+                return CreatedAtAction(nameof(CreateCompany), new { id = company.Id }, company);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
+
+        //[HttpPost]
+        //public async Task<ActionResult<Company>> AddCompany(Company company)
+        //{
+        //    var newCompany = await _companyService.AddCompanyAsync(company);
+        //    return CreatedAtAction(nameof(GetCompany), new { id = newCompany.Id }, newCompany);
+        //}
         [HttpGet]
         public async Task<ActionResult<List<Company>>> GetCompanies()
         {
