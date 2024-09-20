@@ -1,0 +1,28 @@
+<!-- Fancy Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-brand">
+    <h1>Task Management</h1>
+  </div>
+  <ul class="navbar-links">
+    <li><a routerLink="/companies" routerLinkActive="active-link" class="nav-link">Company List</a></li>
+    <li><a routerLink="/companies/create" routerLinkActive="active-link" class="nav-link">Create Company</a></li>
+    <li><a routerLink="/projects" routerLinkActive="active-link" class="nav-link">Project List</a></li>
+    <li><a routerLink="/projects/create" routerLinkActive="active-link" class="nav-link">Create Project</a></li>
+    <!-- Task Navigation -->
+    <li><a routerLink="/tasks" routerLinkActive="active-link" class="nav-link">Task List</a></li>
+    <li><a routerLink="/tasks/create" routerLinkActive="active-link" class="nav-link">Create Task</a></li>
+    <!-- User Navigation -->
+    <li><a routerLink="/users" routerLinkActive="active-link" class="nav-link">User List</a></li>
+
+  </ul>
+</nav>
+
+<!-- Main Content Container -->
+<div class="container">
+  <router-outlet></router-outlet> <!-- Dynamic content will be injected here based on the route -->
+</div>
+
+<!-- Fancy Footer (optional) -->
+<footer class="footer">
+  <p>&copy; 2024 Company Management. All Rights Reserved.</p>
+</footer>

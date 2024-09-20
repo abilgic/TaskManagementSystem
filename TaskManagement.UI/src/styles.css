@@ -1,0 +1,109 @@
+/* Global Styles */
+/* You can add global styles to this file, and also import other style files */
+
+/* Navigation Bar Styling with Dark Gradient */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #004080, #0066cc); /* Darker blue gradient */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+  .navbar h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+
+/* Navigation Links */
+.navbar-links {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+  .navbar-links li {
+    margin-left: 20px;
+  }
+
+.nav-link {
+  color: white; /* Keep text white for contrast */
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 8px 16px; /* Padding for better click area */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+    transform: scale(1.05); /* Slightly scale on hover */
+  }
+
+/* Active Link Styling */
+.active-link {
+  background-color: rgba(255, 255, 255, 0.3); /* Background for active link */
+}
+
+/* Container Styling with Subtle Gradient */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: linear-gradient(to bottom, #e0f7fa, #ffffff); /* Light gradient */
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Styling with Dark Gradient */
+.footer {
+  text-align: center;
+  padding: 10px;
+  background: linear-gradient(to right, #004080, #0066cc); /* Darker blue gradient */
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+/* Card Layout for Companies */
+.company-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card h3 {
+    margin-top: 0;
+  }
+
+/* Details Button Styling */
+.details-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+  .details-btn:hover {
+    background-color: #0056b3;
+  }
