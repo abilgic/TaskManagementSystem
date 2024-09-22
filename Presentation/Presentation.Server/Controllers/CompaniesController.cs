@@ -24,9 +24,10 @@ namespace TaskManagement.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompanies()
         {
-            // Returning an empty list explicitly
-            return Ok(new List<Company>());
+            var companies = await _companyService.GetAllAsync(); // Assuming this method exists
+            return Ok(companies);
         }
+
         [HttpPost]
         public async Task<ActionResult<Company>> AddCompany([FromBody] CompanyDto companyDto)
         {
@@ -41,6 +42,24 @@ namespace TaskManagement.Server.Controllers
             // Return a 201 Created response with the location of the new company and the company details
             return CreatedAtAction(nameof(GetCompanies), new { id = newCompany.Id }, newCompany);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCompany(int id)
+        {
+            // Check if the company exists
+            var company = await _companyService.GetByIdAsync(id);
+            if (company == null)
+            {
+                return NotFound($"Company with ID {id} not found.");
+            }
+
+            // Call the service to delete the company
+            await _companyService.DeleteAsync(id);
+
+            // Return a No Content response indicating successful deletion
+            return NoContent();
+        }
+
 
     }
 }
