@@ -35,17 +35,11 @@ namespace TaskManagement.Server.Controllers
                 return BadRequest("Company data is required.");
             }
 
-            var newCompany = new Company
-            {
-                Name = companyDto.Name,
-                UserLimit = companyDto.UserLimit,
-                ProjectLimit = companyDto.ProjectLimit,
-                ActiveUntil = companyDto.ActiveUntil
-            };
+            // Call the service to create the company and return the created entity with Id
+            var newCompany = await _companyService.CreateAsync(companyDto);
 
-            //await _companyService.AddCompanyAsync(newCompany); // Call the service to add the company
-
-            return CreatedAtAction(nameof(GetCompanies), new { id = newCompany.Id }, newCompany); // Return the created company
+            // Return a 201 Created response with the location of the new company and the company details
+            return CreatedAtAction(nameof(GetCompanies), new { id = newCompany.Id }, newCompany);
         }
 
     }
