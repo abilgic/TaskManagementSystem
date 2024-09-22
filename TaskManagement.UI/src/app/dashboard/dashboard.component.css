@@ -1,20 +1,19 @@
-.dashboard-container {
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+.sidebar {
+  background-color: #343a40; /* Dark background for sidebar */
+  color: white;
 }
 
-.company-card {
-  width: 300px;
-  transition: transform 0.3s;
-}
-
-  .company-card:hover {
-    transform: scale(1.05);
+  .sidebar .nav-link {
+    color: #b0b3b8; /* Lighter color for links */
+    padding: 10px 15px; /* Padding for better touch targets */
   }
 
-.user-summary-card {
-  width: 300px;
-  background-color: #f5f5f5;
-}
+    .sidebar .nav-link:hover {
+      background-color: #495057; /* Darker background on hover */
+      color: white; /* Change text color on hover */
+    }
+
+    .sidebar .nav-link.active {
+      background-color: #007bff; /* Active link background */
+      color: white; /* Active link text color */
+    }

@@ -13,7 +13,6 @@ namespace TaskManagement.Domain.Entities
         public string Description { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
-        public List<TaskItem> Tasks { get; set; }
     }
 
 }

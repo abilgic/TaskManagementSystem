@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { LoginResponse } from '../models/login-response.model';
 
 @Component({
   selector: 'app-login',
@@ -14,19 +15,17 @@ export class LoginComponent {
   };
   errorMessage: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   onSubmit() {
     this.authService.login(this.loginRequest).subscribe({
-      next: (response) => {
-        // Save the token to local storage
-        localStorage.setItem('token', response.token);
-
-        // Navigate to the dashboard or another route
+      next: (response: LoginResponse) => {
+        localStorage.setItem('authToken', response.token);
         this.router.navigate(['/dashboard']);
       },
-      error: (error) => {
+      error: (error: any) => {
         this.errorMessage = 'Invalid username or password.';
+        console.error('Login error:', error);
       }
     });
   }

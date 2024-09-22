@@ -1,68 +1,70 @@
-/* Global Styles */
-html, body {
-  height: 100%;
-  margin: 0;
-  background: linear-gradient(to bottom, #0a2f6b, #2a9df4); /* Blue gradient background */
-  color: #e0e0e0; /* Light text color for contrast */
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.sidebar h4 {
+  color: #ffffff; /* White text color */
+  background-color: #343a40; /* Dark background */
+  padding: 15px; /* Padding for spacing */
+  border-radius: 4px; /* Rounded corners */
+  text-align: center; /* Center the text */
+  margin: 0; /* Remove default margin */
 }
 
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure the container takes up full height */
+.sidebar {
+  background-color: #495057; /* Darker sidebar background */
 }
 
-/* Style for the top navigation bar */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: linear-gradient(to right, #004080, #0066cc); /* Dark blue gradient for navbar */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+.nav-link {
+  color: #ffffff; /* White text for nav links */
 }
 
-/* Remove bullets from the navbar links */
-.navbar-links {
-  list-style-type: none; /* Removes bullets */
-  margin: 0;
-  padding: 0;
-  display: flex; /* Keeps links aligned horizontally */
-  justify-content: center; /* Center align links */
-}
-
-  .navbar-links .nav-link {
-    background: none; /* No background */
-    border: none; /* No border */
-    color: #e0e0e0; /* Light text color */
-    cursor: pointer; /* Pointer cursor */
-    padding: 12px 20px; /* Increased padding */
-    text-align: center; /* Center text in link */
-    font-size: 1.2rem; /* Font size */
-    width: auto; /* Auto width for better appearance */
-    margin: 0 10px; /* Space between links */
-    position: relative; /* For the pseudo-element */
-    transition: color 0.3s ease; /* Smooth color transition */
-    text-decoration: none; /* Remove underline */
+  .nav-link.active {
+    background-color: #007bff; /* Blue background for active link */
   }
 
-    .navbar-links .nav-link:hover {
-      color: #ffffff; /* Change text color on hover */
+  .nav-link:hover {
+    background-color: #0069d9; /* Darker blue on hover */
+  }
+
+
+.dashboard {
+  background: linear-gradient(135deg, #ff4757, #ff6b81); /* Red gradient for the dashboard */
+  color: white; /* White text color */
+  height: 100vh; /* Full height */
+  padding: 20px; /* Add some padding */
+}
+
+.sidebar {
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent white for the sidebar */
+  color: white; /* White text color in the sidebar */
+  border-radius: 8px; /* Rounded corners for the sidebar */
+}
+
+  .sidebar .nav-link {
+    color: white; /* White text for nav links */
+  }
+
+    .sidebar .nav-link:hover {
+      text-decoration: underline; /* Underline on hover */
     }
 
-    /* Fancy hover effect */
-    .navbar-links .nav-link::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: 0;
-      height: 2px; /* Adjust the height of the hover effect */
-      background: #ffffff; /* White color for the underline effect */
-      transition: width 0.3s ease, left 0.3s ease; /* Smooth transition */
-    }
+/* styles.css or login.component.css */
+body {
+  margin: 0; /* Remove default margin */
+}
 
-    .navbar-links .nav-link:hover::after {
-      width: 100%; /* Full width on hover */
-      left: 0; /* Reset left position */
-    }
+.login-container {
+  background: linear-gradient(135deg, #ff4757, #ff6b81); /* Red gradient */
+  height: 100vh; /* Full viewport height */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9); /* Slightly transparent white for the card */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Add some padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+h3 {
+  color: #333; /* Dark text for the title */
+}

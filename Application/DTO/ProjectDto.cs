@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagement.Domain.Entities
+namespace TaskManagement.Application.DTO
 {
-    public class Product
+    public class ProjectDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
+        public string Description { get; set; }
+        public int CompanyId { get; set; }
     }
 }

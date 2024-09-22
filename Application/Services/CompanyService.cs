@@ -12,50 +12,71 @@ namespace TaskManagement.Application.Services
 {
     public class CompanyService : ICompanyService
     {
-        private readonly ICompanyRepository _companyRepository;
+        private readonly IRepository<Company> _companyRepository;
 
-        public CompanyService(ICompanyRepository companyRepository)
+        public CompanyService(IRepository<Company> companyRepository)
         {
             _companyRepository = companyRepository;
         }
 
-        public async Task<List<Company>> GetCompaniesAsync() => await _companyRepository.GetAllAsync();
-
-        public async Task<Company> GetCompanyAsync(int id) => await _companyRepository.GetByIdAsync(id);
-
-        //public async Task<Company> AddCompanyAsync(Company company)
-        //{
-        //    await _companyRepository.AddAsync(company);
-        //    return company;
-        //}
-
-        public async Task<Company> CreateCompanyAsync(CompanyDto companyDto, User adminUser)
+        public async Task<List<Company>> GetAllAsync()
         {
-            // Check if the admin user already has a company
-            var existingCompany = await _companyRepository.AnyAsync(c => c.AdminUserId == adminUser.Id);
-            if (existingCompany)
-            {
-                throw new InvalidOperationException("This admin user already has a company.");
-            }
+            return await _companyRepository.GetAllAsync();
+        }
 
-            // Create the company
+        public async Task<Company> GetByIdAsync(int id)
+        {
+            var company = await _companyRepository.GetByIdAsync(id);
+            if (company == null)
+            {
+                throw new KeyNotFoundException("Company not found.");
+            }
+            return company;
+        }
+
+        public async Task<Company> CreateAsync(CompanyDto companyDto)
+        {
             var company = new Company
             {
                 Name = companyDto.Name,
                 UserLimit = companyDto.UserLimit,
                 ProjectLimit = companyDto.ProjectLimit,
-                ActiveDuration = companyDto.ActiveDuration,
-                AdminUserId = adminUser.Id // Link the admin user to the new company
+                ActiveUntil = companyDto.ActiveUntil
             };
 
-            // Use the repository to add the company
             await _companyRepository.AddAsync(company);
-
-            // The repository should handle saving changes, so no need for explicit _context.SaveChangesAsync()
-
             return company;
         }
 
+        public async Task<Company> UpdateAsync(int id, CompanyDto companyDto)
+        {
+            var existingCompany = await _companyRepository.GetByIdAsync(id);
+            if (existingCompany == null)
+            {
+                throw new KeyNotFoundException("Company not found.");
+            }
+
+            existingCompany.Name = companyDto.Name;
+            existingCompany.UserLimit = companyDto.UserLimit;
+            existingCompany.ProjectLimit = companyDto.ProjectLimit;
+            existingCompany.ActiveUntil = companyDto.ActiveUntil;
+
+            await _companyRepository.UpdateAsync(existingCompany);
+            return existingCompany;
+        }
+
+        public async System.Threading.Tasks.Task DeleteAsync(int id)
+        {
+            var company = await _companyRepository.GetByIdAsync(id);
+            if (company == null)
+            {
+                throw new KeyNotFoundException("Company not found.");
+            }
+
+            await _companyRepository.DeleteAsync(company);
+        }
     }
 
 }
+
+

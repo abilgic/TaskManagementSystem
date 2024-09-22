@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TaskManagement.Domain.Interfaces;
 using TaskManagement.Infrastructure.Models;
@@ -45,6 +44,10 @@ namespace TaskManagement.Infrastructure.Repositories
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
-    }
 
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().AnyAsync(predicate);
+        }
+    }
 }

@@ -45,11 +45,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
-builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 
 builder.Services.AddCors(options =>
@@ -83,19 +82,19 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 // Call the seed data method
 
-//try
-//{
-//    using (var scope = app.Services.CreateScope())
-//    {
-//        var services = scope.ServiceProvider;
-//        var context = services.GetRequiredService<AppDbContext>();
-//        await SeedData.InitializeAsync(context);
-//    }
-//}
-//catch (Exception ex)
-//{
-//    // Log the exception (using your preferred logging framework)
-//    Console.WriteLine($"An error occurred: {ex.Message}");
-//}
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<AppDbContext>();
+        await SeedData.InitializeAsync(context);
+    }
+}
+catch (Exception ex)
+{
+    // Log the exception (using your preferred logging framework)
+    Console.WriteLine($"An error occurred: {ex.Message}");
+}
 
 app.Run();

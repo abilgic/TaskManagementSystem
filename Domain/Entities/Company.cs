@@ -13,9 +13,8 @@ namespace TaskManagement.Domain.Entities
         public int ProjectLimit { get; set; }
         public int UserLimit { get; set; }
         public DateTime ActiveUntil { get; set; }
-        public List<Project> Projects { get; set; }
-        public List<User> Users { get; set; }
-        public int AdminUserId { get; set; } // Administrator user ID for this company
-        public TimeSpan ActiveDuration { get; set; }
+        public int AdminUserId { get; set; }
+        public int ActiveDurationDays { get; set; } // Change to int for days
     }
+
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class db : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,7 +22,7 @@ namespace TaskManagement.Infrastructure.Migrations
                     UserLimit = table.Column<int>(type: "int", nullable: false),
                     ActiveUntil = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AdminUserId = table.Column<int>(type: "int", nullable: false),
-                    ActiveDuration = table.Column<TimeSpan>(type: "time", nullable: false)
+                    ActiveDurationDays = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,13 +58,12 @@ namespace TaskManagement.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastLogin = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Roles = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,23 +89,18 @@ namespace TaskManagement.Infrastructure.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     Comments = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
-                    AssignedUserId = table.Column<int>(type: "int", nullable: true),
-                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AssignedToUserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tasks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tasks_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Tasks_Users_AssignedUserId",
-                        column: x => x.AssignedUserId,
+                        name: "FK_Tasks_Users_AssignedToUserId",
+                        column: x => x.AssignedToUserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -115,14 +109,9 @@ namespace TaskManagement.Infrastructure.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_AssignedUserId",
+                name: "IX_Tasks_AssignedToUserId",
                 table: "Tasks",
-                column: "AssignedUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tasks_ProjectId",
-                table: "Tasks",
-                column: "ProjectId");
+                column: "AssignedToUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_CompanyId",
@@ -134,10 +123,10 @@ namespace TaskManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "Projects");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "Users");

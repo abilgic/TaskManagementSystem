@@ -9,19 +9,22 @@ using TaskManagement.Domain.Entities;
 using TaskManagement.Domain.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.Extensions.Configuration; // Add this line
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http; // Add this line
 
 namespace TaskManagement.Application.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IConfiguration _configuration; // Add this line
+        private readonly IRepository<User> _userRepository;
+        private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserService(IUserRepository userRepository, IConfiguration configuration) // Modify this line
+        public UserService(IRepository<User> userRepository, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
-            _configuration = configuration; // Assign the injected configuration
+            _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<List<User>> GetAllUsersAsync()
@@ -40,38 +43,42 @@ namespace TaskManagement.Application.Services
             return user;
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task<User> GetCurrentUserAsync()
         {
-            await _userRepository.UpdateAsync(user);
-        }
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        public async Task DeleteUserAsync(int id)
-        {
-            var user = await _userRepository.GetByIdAsync(id);
-            if (user == null)
+            if (userId == null)
             {
-                throw new InvalidOperationException("User not found.");
+                throw new InvalidOperationException("User not found in the current context.");
             }
 
-            await _userRepository.DeleteAsync(user);
+            return await _userRepository.GetByIdAsync(int.Parse(userId));
         }
 
         public async Task<string> AuthenticateAsync(string username, string password)
         {
             try
             {
-                var user = await _userRepository.GetUserByUsernameAndPasswordAsync(username, password);
+                var users = await _userRepository.GetAllAsync();
+                var user = users.FirstOrDefault(u => u.Username == username && u.Password == password);
+
                 if (user == null)
                 {
                     return null;
                 }
 
-                var claims = new[]
-                {
+                var claims = new List<Claim>
+            {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("UserId", user.Id.ToString())
+                new Claim("UserId", user.Id.ToString()),
+                new Claim("IsAdmin", user.IsAdmin.ToString())
             };
+
+                foreach (var role in user.Roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, role));
+                }
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -81,18 +88,18 @@ namespace TaskManagement.Application.Services
                     audience: _configuration["Jwt:Audience"],
                     claims: claims,
                     expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpireMinutes"])),
-                    signingCredentials: creds);
+                    signingCredentials: creds
+                );
 
                 return new JwtSecurityTokenHandler().WriteToken(token);
-
             }
             catch (Exception e)
             {
-
+                // Handle exceptions appropriately
                 throw;
             }
-            
         }
-
     }
+
+
 }
