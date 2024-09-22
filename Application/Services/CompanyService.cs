@@ -41,7 +41,8 @@ namespace TaskManagement.Application.Services
                 Name = companyDto.Name,
                 UserLimit = companyDto.UserLimit,
                 ProjectLimit = companyDto.ProjectLimit,
-                ActiveUntil = companyDto.ActiveUntil
+                ActiveUntil = companyDto.ActiveUntil,
+                AdminUserId = companyDto.AdminUserId
             };
 
             await _companyRepository.AddAsync(company);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using TaskManagement.Application.DTO;
 using TaskManagement.Application.Interfaces;
 using TaskManagement.Domain.Entities;
@@ -36,12 +37,28 @@ namespace TaskManagement.Server.Controllers
                 return BadRequest("Company data is required.");
             }
 
+            // Get the current user's ID (assuming you have a way to retrieve it)
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+           
+            int adminUserId;
+
+            if (int.TryParse(currentUserId, out adminUserId))
+            {
+                companyDto.AdminUserId = adminUserId;
+            }
+            else
+            {
+                return BadRequest("Invalid Admin User ID.");
+            }
+            // Set the AdminUserId to the current user's ID
+            companyDto.AdminUserId = adminUserId;
+
             // Call the service to create the company and return the created entity with Id
             var newCompany = await _companyService.CreateAsync(companyDto);
 
-            // Return a 201 Created response with the location of the new company and the company details
             return CreatedAtAction(nameof(GetCompanies), new { id = newCompany.Id }, newCompany);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCompany(int id)
