@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component'; // Adjust the path as necessary
-import { DashboardComponent } from './dashboard/dashboard.component'; // Example for another route
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CompanyManagementComponent } from './company-management/company-management.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to login by default
-  { path: '**', redirectTo: '/login' } // Handle any unknown routes
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  {
+    path: 'dashboard', component: DashboardComponent, children: [
+      { path: 'company-management', component: CompanyManagementComponent, canActivate: [AuthGuard] }
+    ]
+  },
+
+  { path: '**', redirectTo: '/login' } // This should be last
 ];
 
 @NgModule({

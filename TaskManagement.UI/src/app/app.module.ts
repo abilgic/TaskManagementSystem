@@ -5,13 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component'; // Adjust the path as necessary
-import { DashboardComponent } from './dashboard/dashboard.component'; // Example
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CompanyManagementComponent } from './company-management/company-management.component'; // Example
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent // Example
+    DashboardComponent,
+    CompanyManagementComponent // Example
   ],
   imports: [
     BrowserModule,

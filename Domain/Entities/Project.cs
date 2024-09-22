@@ -15,4 +15,17 @@ namespace TaskManagement.Domain.Entities
         public Company Company { get; set; }
     }
 
+    //public class Project
+    //{
+    //    public int Id { get; set; }
+    //    public string Name { get; set; }
+    //    public string Description { get; set; }
+
+    //    // Relationships
+    //    public int CompanyId { get; set; }
+    //    public Company Company { get; set; }
+    //    public ICollection<Task> Tasks { get; set; }
+    //}
+
+
 }

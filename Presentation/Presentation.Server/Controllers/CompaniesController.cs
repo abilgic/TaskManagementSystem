@@ -27,7 +27,26 @@ namespace TaskManagement.Server.Controllers
             // Returning an empty list explicitly
             return Ok(new List<Company>());
         }
+        [HttpPost]
+        public async Task<ActionResult<Company>> AddCompany([FromBody] CompanyDto companyDto)
+        {
+            if (companyDto == null)
+            {
+                return BadRequest("Company data is required.");
+            }
 
+            var newCompany = new Company
+            {
+                Name = companyDto.Name,
+                UserLimit = companyDto.UserLimit,
+                ProjectLimit = companyDto.ProjectLimit,
+                ActiveUntil = companyDto.ActiveUntil
+            };
+
+            //await _companyService.AddCompanyAsync(newCompany); // Call the service to add the company
+
+            return CreatedAtAction(nameof(GetCompanies), new { id = newCompany.Id }, newCompany); // Return the created company
+        }
 
     }
 }

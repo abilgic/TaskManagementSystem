@@ -24,24 +24,37 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  //login(loginRequest: { username: string; password: string }): Observable<LoginResponse> {
+  //  return this.http.post<LoginResponse>(this.apiUrl, loginRequest).pipe(
+  //    tap((response: LoginResponse) => { // Specify the type here
+  //      console.log('Login successful:', response); // Log success
+  //      localStorage.setItem('authToken', response.token); // Store the token
+  //      this.setRolesFromToken(response.token); // Extract roles from token
+
+  //      // Store user info
+  //      const user = { username: loginRequest.username, roles: this.roles };
+  //      localStorage.setItem('currentUser', JSON.stringify(user));
+  //    }),
+  //    catchError(error => {
+  //      console.error('Login failed:', error);
+  //      return throwError('Invalid username or password'); // Rethrow the error
+  //    })
+  //  );
+  //}
   login(loginRequest: { username: string; password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.apiUrl, loginRequest).pipe(
-      tap((response: LoginResponse) => { // Specify the type here
-        localStorage.setItem('authToken', response.token); // Store the token
-        this.setRolesFromToken(response.token); // Extract roles from token
-
-        // Store user info
-        const user = { username: loginRequest.username, roles: this.roles };
-        localStorage.setItem('currentUser', JSON.stringify(user));
+      tap((response: LoginResponse) => {
+        localStorage.setItem('authToken', response.token);
+         
       }),
       catchError(error => {
         console.error('Login failed:', error);
-        return throwError('Invalid username or password'); // Rethrow the error
+        return throwError('Invalid username or password');
       })
     );
   }
-
   logout() {
+    console.log('Logging out...');
     localStorage.removeItem('authToken'); // Clear the token from localStorage
     this.router.navigate(['/login']); // Navigate to login
   }
@@ -64,6 +77,10 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('authToken'); // Check if token exists
+    const token = localStorage.getItem('authToken'); // Adjust according to your implementation
+    console.log('AuthService: checking token:', token); // Log token state
+    console.log('Checking login status, token found:', !!token); 
+    return !!token; // Returns true if a token exists
   }
+
 }

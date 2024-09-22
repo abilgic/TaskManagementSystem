@@ -75,6 +75,30 @@ namespace TaskManagement.Application.Services
 
             await _companyRepository.DeleteAsync(company);
         }
+
+        //public async  System.Threading.Tasks.Task CreateProjectAsync(int companyId, Project project)
+        //{
+        //    var company = await _companyRepository.GetByIdAsync(companyId);
+        //    if (company.Projects.Count >= company.MaxProjects)
+        //    {
+        //        throw new InvalidOperationException("Project limit exceeded.");
+        //    }
+        //    await _projectRepository.AddAsync(project);
+        //}
+
+        //public async Task AssignTaskAsync(int taskId, int userId)
+        //{
+        //    var task = await _taskRepository.GetByIdAsync(taskId);
+        //    task.UserId = userId;
+        //    await _taskRepository.UpdateAsync(task);
+        //}
+
+        //public async Task UpdateTaskStatusAsync(int taskId, TaskStatus newStatus)
+        //{
+        //    var task = await _taskRepository.GetByIdAsync(taskId);
+        //    task.Status = newStatus;
+        //    await _taskRepository.UpdateAsync(task);
+        //}
     }
 
 }

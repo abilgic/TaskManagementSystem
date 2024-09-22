@@ -1,0 +1,42 @@
+<div class="container my-5">
+  <h2 class="text-center mb-4">Company Management</h2>
+
+  <!-- Add new company form -->
+  <form (ngSubmit)="addCompany()" class="mb-4">
+    <div class="form-group">
+      <label for="name">Company Name</label>
+      <input type="text" [(ngModel)]="newCompany.name" name="name" class="form-control" required placeholder="Enter company name">
+    </div>
+
+    <div class="form-group">
+      <label for="userLimit">User Limit</label>
+      <input type="number" [(ngModel)]="newCompany.userLimit" name="userLimit" class="form-control" required placeholder="Enter user limit">
+    </div>
+
+    <div class="form-group">
+      <label for="projectLimit">Project Limit</label>
+      <input type="number" [(ngModel)]="newCompany.projectLimit" name="projectLimit" class="form-control" required placeholder="Enter project limit">
+    </div>
+
+    <div class="form-group">
+      <label for="activeUntil">Active Until</label>
+      <input type="date" [(ngModel)]="newCompany.activeUntil" name="activeUntil" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add Company</button>
+  </form>
+
+  <!-- Display list of companies -->
+  <div class="list-group">
+    <h4>Existing Companies</h4>
+    <ul class="list-group">
+      <li *ngFor="let company of companies" class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ company.name }}</strong>
+          <span class="text-muted">(User Limit: {{ company.userLimit }}, Project Limit: {{ company.projectLimit }}, Active Until: {{ company.activeUntil | date }})</span>
+        </div>
+        <button *ngIf="company.id !== undefined" class="btn btn-danger btn-sm" (click)="deleteCompany(company.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>

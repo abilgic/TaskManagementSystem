@@ -22,6 +22,20 @@ namespace TaskManagement.Domain.Entities
         public List<string> Roles { get; set; } = new List<string>();
         public ICollection<TaskManagement.Domain.Entities.Task> Tasks { get; set; } = new List<TaskManagement.Domain.Entities.Task>();
     }
+    //public class User
+    //{
+    //    public int Id { get; set; }
+    //    public string Username { get; set; }
+    //    public string PasswordHash { get; set; }
+    //    public string FirstName { get; set; }
+    //    public string LastName { get; set; }
+    //    public bool IsAdmin { get; set; } // Determines if user is a company admin
+
+    //    // Relationships
+    //    public int CompanyId { get; set; }
+    //    public Company Company { get; set; }
+    //    public ICollection<Task> Tasks { get; set; }
+    //}
 
 
 }
