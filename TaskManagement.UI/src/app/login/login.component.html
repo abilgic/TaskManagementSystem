@@ -1,0 +1,29 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Login</h2>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input id="username"
+               type="text"
+               [(ngModel)]="loginRequest.username"
+               name="username"
+               required
+               placeholder="Enter your username" />
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input id="password"
+               type="password"
+               [(ngModel)]="loginRequest.password"
+               name="password"
+               required
+               placeholder="Enter your password" />
+      </div>
+      <button type="submit" class="login-button">Login</button>
+      <p class="register-link">
+        Don't have an account? <a href="/register">Register</a>
+      </p>
+    </form>
+  </div>
+</div>

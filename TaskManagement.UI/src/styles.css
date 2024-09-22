@@ -1,109 +1,68 @@
 /* Global Styles */
-/* You can add global styles to this file, and also import other style files */
-
-/* Navigation Bar Styling with Dark Gradient */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(to right, #004080, #0066cc); /* Darker blue gradient */
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
+html, body {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(to bottom, #0a2f6b, #2a9df4); /* Blue gradient background */
+  color: #e0e0e0; /* Light text color for contrast */
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-  .navbar h1 {
-    margin: 0;
-    font-size: 1.8rem;
-  }
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the container takes up full height */
+}
 
-/* Navigation Links */
+/* Style for the top navigation bar */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(to right, #004080, #0066cc); /* Dark blue gradient for navbar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Remove bullets from the navbar links */
 .navbar-links {
-  list-style-type: none;
+  list-style-type: none; /* Removes bullets */
   margin: 0;
   padding: 0;
-  display: flex;
+  display: flex; /* Keeps links aligned horizontally */
+  justify-content: center; /* Center align links */
 }
 
-  .navbar-links li {
-    margin-left: 20px;
+  .navbar-links .nav-link {
+    background: none; /* No background */
+    border: none; /* No border */
+    color: #e0e0e0; /* Light text color */
+    cursor: pointer; /* Pointer cursor */
+    padding: 12px 20px; /* Increased padding */
+    text-align: center; /* Center text in link */
+    font-size: 1.2rem; /* Font size */
+    width: auto; /* Auto width for better appearance */
+    margin: 0 10px; /* Space between links */
+    position: relative; /* For the pseudo-element */
+    transition: color 0.3s ease; /* Smooth color transition */
+    text-decoration: none; /* Remove underline */
   }
 
-.nav-link {
-  color: white; /* Keep text white for contrast */
-  text-decoration: none;
-  font-size: 1.1rem;
-  padding: 8px 16px; /* Padding for better click area */
-  border-radius: 4px; /* Rounded corners */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-}
+    .navbar-links .nav-link:hover {
+      color: #ffffff; /* Change text color on hover */
+    }
 
-  .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
-    transform: scale(1.05); /* Slightly scale on hover */
-  }
+    /* Fancy hover effect */
+    .navbar-links .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 2px; /* Adjust the height of the hover effect */
+      background: #ffffff; /* White color for the underline effect */
+      transition: width 0.3s ease, left 0.3s ease; /* Smooth transition */
+    }
 
-/* Active Link Styling */
-.active-link {
-  background-color: rgba(255, 255, 255, 0.3); /* Background for active link */
-}
-
-/* Container Styling with Subtle Gradient */
-.container {
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-  background: linear-gradient(to bottom, #e0f7fa, #ffffff); /* Light gradient */
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Footer Styling with Dark Gradient */
-.footer {
-  text-align: center;
-  padding: 10px;
-  background: linear-gradient(to right, #004080, #0066cc); /* Darker blue gradient */
-  color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-/* Card Layout for Companies */
-.company-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-  .card:hover {
-    transform: translateY(-5px);
-  }
-
-  .card h3 {
-    margin-top: 0;
-  }
-
-/* Details Button Styling */
-.details-btn {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-  .details-btn:hover {
-    background-color: #0056b3;
-  }
+    .navbar-links .nav-link:hover::after {
+      width: 100%; /* Full width on hover */
+      left: 0; /* Reset left position */
+    }

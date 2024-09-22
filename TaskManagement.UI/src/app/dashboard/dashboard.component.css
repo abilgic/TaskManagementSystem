@@ -1,0 +1,20 @@
+.dashboard-container {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.company-card {
+  width: 300px;
+  transition: transform 0.3s;
+}
+
+  .company-card:hover {
+    transform: scale(1.05);
+  }
+
+.user-summary-card {
+  width: 300px;
+  background-color: #f5f5f5;
+}

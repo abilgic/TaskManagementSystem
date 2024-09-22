@@ -1,6 +1,8 @@
+// project.model.ts
 export interface Project {
   id: number;
   name: string;
   description: string;
-  // Add other project fields as needed
+  // Add other properties as needed
 }
+

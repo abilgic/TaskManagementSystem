@@ -7,9 +7,11 @@ export interface Company {
   email?: string;
   phone?: string;
   establishedDate?: Date;
-  projectLimit: number;   // Add the projectLimit property
-  userLimit: number;      // Add the userLimit property
-  activeUntil: Date;      // Add activeUntil property if needed
-  projects: any[];        // Add projects if relevant
-  users: any[];           // Add users if relevant
+  projectLimit: number;   // Project limit property
+  userLimit: number;      // User limit property
+  activeUntil: Date;      // Active until property
+  projects: any[];        // Relevant projects
+  users: any[];           // Relevant users
+  adminUserId?: number | null;   // Change to include null
 }
+

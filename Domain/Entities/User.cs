@@ -17,10 +17,10 @@ namespace TaskManagement.Domain.Entities
         public bool IsAdmin { get; set; } // Indicates if the user is an admin
         public int CompanyId { get; set; } // Foreign key linking to the user's company
         public Company Company { get; set; } // Navigation property for the company
-        public ICollection<TaskItem> Tasks { get; set; } // Tasks assigned to the user
+        public ICollection<TaskItem> AssignedTasks { get; set; } // Tasks assigned to the user
         public DateTime CreatedAt { get; set; } // Date the user was created
         public DateTime LastLogin { get; set; } // Timestamp of the last login
-        public List<TaskItem> AssignedTasks { get; set; }
     }
+
 
 }

@@ -17,9 +17,10 @@ namespace TaskManagement.Domain.Entities
         public TaskStatus Status { get; set; }
         public string Comments { get; set; }
         public int ProjectId { get; set; }
-        public Project Project { get; set; }
-        public int? AssignedUserId { get; set; }
-        public User AssignedUser { get; set; }
-        public List<string> Tags { get; set; }
+        public Project Project { get; set; } // Navigation property to Project
+        public int? AssignedUserId { get; set; } // Nullable foreign key for User
+        public User AssignedUser { get; set; } // Navigation property to User
+        public List<string> Tags { get; set; } // List of tags for categorization
     }
+
 }

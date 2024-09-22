@@ -51,24 +51,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
-//builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
-//{
-//    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-//}));
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowLocalhost",
-//        builder =>
-//        {
-//            builder.WithOrigins("https://localhost:4200", "https://127.0.0.1:4200")
-//                   .AllowAnyHeader()
-//                   .AllowAnyMethod();
-//        });
-//});
-//builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
-//{
-//    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-//}));
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
@@ -99,10 +82,20 @@ app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
 // Call the seed data method
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
-    await SeedData.InitializeAsync(context);
-}
+
+//try
+//{
+//    using (var scope = app.Services.CreateScope())
+//    {
+//        var services = scope.ServiceProvider;
+//        var context = services.GetRequiredService<AppDbContext>();
+//        await SeedData.InitializeAsync(context);
+//    }
+//}
+//catch (Exception ex)
+//{
+//    // Log the exception (using your preferred logging framework)
+//    Console.WriteLine($"An error occurred: {ex.Message}");
+//}
+
 app.Run();

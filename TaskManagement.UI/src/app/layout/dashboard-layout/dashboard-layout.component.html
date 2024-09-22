@@ -1,0 +1,21 @@
+
+<div class="dashboard-container" fxLayout="column" fxLayoutGap="20px">
+  <header>
+    <ul class="navbar-links dark-nav">
+      <li><a routerLink="/companies" routerLinkActive="active-link" class="nav-link">Company List</a></li>
+      <li><a routerLink="/companies/create" routerLinkActive="active-link" class="nav-link">Create Company</a></li>
+      <li><a routerLink="/projects" routerLinkActive="active-link" class="nav-link">Project List</a></li>
+      <li><a routerLink="/projects/create" routerLinkActive="active-link" class="nav-link">Create Project</a></li>
+      <li><a routerLink="/tasks" routerLinkActive="active-link" class="nav-link">Task List</a></li>
+      <li><a routerLink="/tasks/create" routerLinkActive="active-link" class="nav-link">Create Task</a></li>
+      <li><a routerLink="/users" routerLinkActive="active-link" class="nav-link">User List</a></li>
+      <li><a routerLink="/users" routerLinkActive="active-link" class="nav-link" (click)="logout()">Logout</a></li>
+      <!--<li><button (click)="logout()" class="nav-link logout-button">Logout</button></li>-->
+    </ul>
+  </header>
+
+  <main class="content">
+    <!-- Your page content like forms, lists, etc. -->
+    <router-outlet></router-outlet>
+  </main>
+</div>
