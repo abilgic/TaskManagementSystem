@@ -1,30 +1,22 @@
+// src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule if not already imported
+
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component'; // Adjust the path as necessary
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { CompanyManagementComponent } from './company-management/company-management.component';
-import { ProjectComponent } from './project/project.component';
-import { TaskComponent } from './task/task.component';
-import { UserComponent } from './user/user.component'; // Example
+import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    DashboardComponent,
-    CompanyManagementComponent,
-    ProjectComponent,
-    TaskComponent,
-    UserComponent // Example
+    LoginComponent // Add LoginComponent to declarations
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpClientModule,
+    HttpClientModule, // Ensure HttpClientModule is imported
+    ReactiveFormsModule, // Add ReactiveFormsModule here
     AppRoutingModule
   ],
   providers: [],

@@ -1,69 +1,44 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { User } from '../models/user.model';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-interface LoginRequest {
+export interface LoginRequest {
   username: string;
   password: string;
-}
-
-interface LoginResponse {
-  token: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:1162/api/login/authenticate'; // Update to your API URL
-  private roles: string[] = [];
+  private apiUrl = 'http://localhost:1162/api/login'; // Adjust to your API URL
 
-  constructor(private http: HttpClient, private router: Router) { }
-    
-  login(loginRequest: { username: string; password: string }): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.apiUrl, loginRequest).pipe(
-      tap((response: LoginResponse) => {
-        localStorage.setItem('authToken', response.token);
-         
-      }),
-      catchError(error => {
-        console.error('Login failed:', error);
-        return throwError('Invalid username or password');
+  constructor(private http: HttpClient) { }
+
+  login(credentials: LoginRequest): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/authenticate`, credentials).pipe(
+      tap(response => {
+        if (response && response.token) {
+          this.storeToken(response.token);
+        }
       })
     );
   }
-  logout() {
-    console.log('Logging out...');
-    localStorage.removeItem('authToken'); // Clear the token from localStorage
-    this.router.navigate(['/login']); // Navigate to login
-  }
-  // Define the setRolesFromToken method
-  private setRolesFromToken(token: string): void {
-    const decodedToken = this.decodeToken(token);
-    if (decodedToken && decodedToken.roles) {
-      this.roles = decodedToken.roles; // Assuming the token payload contains a 'roles' field
-    }
+
+  private storeToken(token: string): void {
+    localStorage.setItem('authToken', token);
   }
 
-  // Simple utility to decode JWT token
-  public decodeToken(token: string): any {
-    try {
-      return JSON.parse(atob(token.split('.')[1]));
-    } catch (error) {
-      console.error('Failed to decode token:', error);
-      return null;
-    }
+  logout(): void {
+    localStorage.removeItem('authToken');
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
   }
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('authToken'); // Adjust according to your implementation
-    console.log('AuthService: checking token:'); // Log token state
-    console.log('Checking login status, token found:', !!token); 
-    return !!token; // Returns true if a token exists
+    return !!this.getToken();
   }
-
 }
