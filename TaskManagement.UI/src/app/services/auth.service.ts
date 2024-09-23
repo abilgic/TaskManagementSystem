@@ -78,7 +78,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem('authToken'); // Adjust according to your implementation
-    console.log('AuthService: checking token:', token); // Log token state
+    console.log('AuthService: checking token:'); // Log token state
     console.log('Checking login status, token found:', !!token); 
     return !!token; // Returns true if a token exists
   }

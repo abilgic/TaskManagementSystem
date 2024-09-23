@@ -10,7 +10,16 @@
               <a class="nav-link active" routerLink="/dashboard">Home</a>
             </li>
             <li class="nav-item">
-              <a [routerLink]="['/dashboard/company-management']" class="btn custom-btn">Go to Company Page</a>
+              <a [routerLink]="['/dashboard/company-management']" class="btn custom-btn">Company</a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard/project']" class="btn custom-btn">Project</a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard/task']" class="btn custom-btn">Task</a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/dashboard/user']" class="btn custom-btn">User</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" (click)="logout()">Logout</a>
