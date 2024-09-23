@@ -9,6 +9,10 @@ namespace TaskManagement.Application.Interfaces
 {
     public interface IProjectService
     {
-        Task<IEnumerable<Project>> GetProjectsForCompanyAsync(int companyId);
+        Task<IEnumerable<Project>> GetProjectsByCompanyIdAsync(int companyId);
+        Task<Project> CreateProjectAsync(Project newProject);
+        System.Threading.Tasks.Task DeleteProjectAsync(int projectId);
+        Task<Project> GetProjectByIdAsync(int projectId);
+        Task<Project> UpdateProjectAsync(int projectId, Project updatedProject);
     }
 }
