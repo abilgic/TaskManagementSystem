@@ -5,50 +5,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManagement.Domain.Interfaces;
+using TaskManagement.Infrastructure.Models;
 
 namespace TaskManagement.Infrastructure.Repositories
 {
-    public class TaskRepository : ITaskRepository
+    public class TaskRepository : Repository<Domain.Entities.Task>, ITaskRepository
     {
-        private readonly DbContext _context; // Replace with your actual DbContext type
-        private readonly DbSet<Domain.Entities.Task> _taskSet;
+        private readonly AppDbContext _context;
 
-        public TaskRepository(DbContext context) // Replace DbContext with your specific context type
+        public TaskRepository(AppDbContext context) : base(context)
         {
-            _context = context;
-            _taskSet = _context.Set<Domain.Entities.Task>();
+            _context = context;  // Now uses AppDbContext instead of DbContext
         }
 
-        public async Task<IEnumerable<Domain.Entities.Task>> GetTasksByProjectIdAsync(int projectId)
+        // Get tasks by ProjectId
+        public async Task<List<Domain.Entities.Task>> GetTasksByProjectIdAsync(int projectId)
         {
-            return await _taskSet
-                .Where(t => t.ProjectId == projectId)
-                .ToListAsync();
+            var list = await GetAllAsync();
+            return list.Where(t => t.ProjectId == projectId).ToList();
         }
 
-        public async Task<Domain.Entities.Task> GetByIdAsync(int taskId)
+        // Get task by TaskId
+        public async Task<Domain.Entities.Task> GetTaskByIdAsync(int taskId)
         {
-            return await _taskSet.FindAsync(taskId);
+            return await GetByIdAsync(taskId);
         }
 
-        public async Task AddAsync(Domain.Entities.Task task)
+        // Add a new task
+        public async Task AddTaskAsync(Domain.Entities.Task task)
         {
-            await _taskSet.AddAsync(task);
-            await _context.SaveChangesAsync();
+            await AddAsync(task);
         }
 
-        public async Task UpdateAsync(Domain.Entities.Task task)
+        // Update a task
+        public async Task UpdateTaskAsync(Domain.Entities.Task task)
         {
-            _taskSet.Update(task);
-            await _context.SaveChangesAsync();
+            await UpdateAsync(task);
         }
 
-        public async Task DeleteAsync(Domain.Entities.Task task)
-        {
-            _taskSet.Remove(task);
-            await _context.SaveChangesAsync();
+        // Delete a task by its ID
+        public async Task DeleteTaskAsync(Domain.Entities.Task task)
+        {            
+            if (task != null)
+            {
+                await DeleteAsync(task);
+            }
         }
-
-       
     }
 }

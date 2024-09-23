@@ -8,10 +8,24 @@ namespace TaskManagement.Domain.Interfaces
 {
     public interface ITaskRepository
     {
-        System.Threading.Tasks.Task<IEnumerable<Domain.Entities.Task>> GetTasksByProjectIdAsync(int projectId);
-        Task<Domain.Entities.Task> GetByIdAsync(int taskId);
-        Task AddAsync(Domain.Entities.Task task);
-        Task UpdateAsync(Domain.Entities.Task task);
-        Task DeleteAsync(Domain.Entities.Task task);
+        public Task<List<Domain.Entities.Task>> GetTasksByProjectIdAsync(int projectId);
+
+
+        // Get task by TaskId
+        public Task<Domain.Entities.Task> GetTaskByIdAsync(int taskId);
+
+
+        // Add a new task
+        public Task AddTaskAsync(Domain.Entities.Task task);
+
+
+        // Update a task
+        public Task UpdateTaskAsync(Domain.Entities.Task task);
+
+
+        // Delete a task by its ID
+        public Task DeleteTaskAsync(Domain.Entities.Task task);
+
+
     }
 }

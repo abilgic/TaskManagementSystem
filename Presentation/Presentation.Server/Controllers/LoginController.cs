@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskManagement.Application.DTO;
 using TaskManagement.Application.Interfaces;
+using TaskManagement.Application.Services;
 
 namespace TaskManagement.API.Controllers
 {
@@ -8,17 +10,17 @@ namespace TaskManagement.API.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly ILoginService _loginService;
 
-        public LoginController(IUserService userService)
+        public LoginController(ILoginService loginService)
         {
-            _userService = userService;
+            _loginService = loginService;
         }
 
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] LoginRequest loginRequest)
         {
-            var token = await _userService.AuthenticateAsync(loginRequest.Username, loginRequest.Password);
+            var token = await _loginService.AuthenticateAsync(loginRequest.Username, loginRequest.Password);
             if (token == null)
             {
                 return Unauthorized("Invalid username or password.");
@@ -28,9 +30,5 @@ namespace TaskManagement.API.Controllers
         }
     }
 
-    public class LoginRequest
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
+
 }

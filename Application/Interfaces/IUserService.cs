@@ -13,6 +13,6 @@ namespace TaskManagement.Application.Interfaces
         Task<User> GetUserByIdAsync(int id);
         Task<User> CreateUserAsync(User user);
         Task<User> GetCurrentUserAsync();
-        Task<string> AuthenticateAsync(string username, string password);
+        
     }
 }

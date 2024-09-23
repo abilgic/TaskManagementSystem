@@ -23,24 +23,7 @@ export class AuthService {
   private roles: string[] = [];
 
   constructor(private http: HttpClient, private router: Router) { }
-
-  //login(loginRequest: { username: string; password: string }): Observable<LoginResponse> {
-  //  return this.http.post<LoginResponse>(this.apiUrl, loginRequest).pipe(
-  //    tap((response: LoginResponse) => { // Specify the type here
-  //      console.log('Login successful:', response); // Log success
-  //      localStorage.setItem('authToken', response.token); // Store the token
-  //      this.setRolesFromToken(response.token); // Extract roles from token
-
-  //      // Store user info
-  //      const user = { username: loginRequest.username, roles: this.roles };
-  //      localStorage.setItem('currentUser', JSON.stringify(user));
-  //    }),
-  //    catchError(error => {
-  //      console.error('Login failed:', error);
-  //      return throwError('Invalid username or password'); // Rethrow the error
-  //    })
-  //  );
-  //}
+    
   login(loginRequest: { username: string; password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.apiUrl, loginRequest).pipe(
       tap((response: LoginResponse) => {
