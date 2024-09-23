@@ -48,7 +48,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 
 builder.Services.AddCors(options =>
