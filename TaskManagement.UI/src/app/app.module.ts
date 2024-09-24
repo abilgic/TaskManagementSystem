@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CompanyManagementComponent } from './company-management/company-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent // Add LoginComponent to declarations
+    DashboardComponent,
+    CompanyManagementComponent // Add LoginComponent to declarations
   ],
   imports: [
     BrowserModule,

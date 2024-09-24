@@ -1,3 +1,4 @@
+// src/app/auth/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -16,9 +17,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  // Ensure login accepts two arguments: username and password
   login(username: string, password: string): Observable<any> {
-    return this.http.post(this.apiUrl, { username, password });
+    return this.http.post(this.apiUrl, { username, password }).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          this.storeToken(response.token); // Store token after login
+        }
+      })
+    );
   }
 
   private storeToken(token: string): void {
