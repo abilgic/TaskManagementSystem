@@ -1,28 +1,16 @@
-/* src/styles.css or src/global.css */
-
 /* Reset and basic styles */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Poppins', sans-serif; /* Use a consistent font */
-}
-
-/* Login Page Styles */
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #ff512f, #dd2476); /* Gradient for login page */
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Dashboard Styles */
 .dashboard-container {
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack header and main content vertically */
-  height: 100vh; /* Full height of the viewport */
-  background: linear-gradient(to bottom right, #d9d9d9, #b0b0b0); /* Gray gradient background */
-  position: relative; /* Ensure correct stacking context */
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
 }
 
 /* Header styles */
@@ -76,6 +64,11 @@ body {
       background: rgba(255, 255, 255, 0.2); /* Light background on hover */
     }
 
+    /* Active link style */
+    .sidebar a.active {
+      background: rgba(255, 255, 255, 0.3); /* Active link background */
+    }
+
 /* Main content area styles */
 .main-content {
   flex: 1; /* Take the remaining space */
@@ -85,22 +78,21 @@ body {
   border-radius: 8px; /* Rounded corners for content area */
 }
 
-/* Card styles */
-.card {
-  background: #ffffff; /* Card background color */
-  padding: 20px; /* Padding for cards */
-  border-radius: 8px; /* Rounded corners */
-  margin-bottom: 20px; /* Space between cards */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+/* Login Container Styles */
+body.login-page { /* Specific class for the login page */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full height of the viewport */
+  background: linear-gradient(135deg, #ff512f, #dd2476); /* Gradient background */
 }
 
-/* Button styles */
-.button {
-  background-color: #6200ea; /* Button background color */
-  color: white; /* Button text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* Padding for button */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background 0.3s ease; /* Smooth transition for background */
+.login-container {
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  padding: 30px; /* Padding for comfortable feel */
+  border-radius: 15px; /* Rounded corners */
+  width: 350px; /* Fixed width for the container */
+  text-align: center; /* Center text inside the container */
 }
+
+/* Additional Styles for Inputs, Buttons, etc. remain the same */
