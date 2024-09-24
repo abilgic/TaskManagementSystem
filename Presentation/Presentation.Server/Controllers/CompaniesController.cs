@@ -29,7 +29,6 @@ namespace TaskManagement.Server.Controllers
             return Ok(companies);
         }
 
-        [HttpPost]
         public async Task<ActionResult<Company>> AddCompany([FromBody] CompanyDto companyDto)
         {
             if (companyDto == null)
@@ -39,25 +38,30 @@ namespace TaskManagement.Server.Controllers
 
             // Get the current user's ID (assuming you have a way to retrieve it)
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-           
-            int adminUserId;
 
-            if (int.TryParse(currentUserId, out adminUserId))
-            {
-                companyDto.AdminUserId = adminUserId;
-            }
-            else
+            if (!int.TryParse(currentUserId, out int adminUserId))
             {
                 return BadRequest("Invalid Admin User ID.");
             }
+
             // Set the AdminUserId to the current user's ID
             companyDto.AdminUserId = adminUserId;
 
-            // Call the service to create the company and return the created entity with Id
-            var newCompany = await _companyService.CreateAsync(companyDto);
+            try
+            {
+                // Call the service to create the company and return the created entity with Id
+                var newCompany = await _companyService.CreateAsync(companyDto);
+                return CreatedAtAction(nameof(GetCompanies), new { id = newCompany.Id }, newCompany);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (if you have a logging mechanism)
+                // _logger.LogError(ex, "Error while adding a company.");
 
-            return CreatedAtAction(nameof(GetCompanies), new { id = newCompany.Id }, newCompany);
+                return StatusCode(500, "Internal server error while creating the company.");
+            }
         }
+
 
 
         [HttpDelete("{id}")]

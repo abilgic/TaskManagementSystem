@@ -1,6 +1,71 @@
-<!-- src/app/company-management/company-management.component.html -->
-<div class="company-container">
-  <h1>Company Management</h1>
-  <p>Here you can manage all the companies.</p>
-  <!-- Add table, forms, or other UI for managing companies -->
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Company Management Dashboard</h1>
+  </header>
+  
+  <main class="dashboard-content">
+    <form #companyForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Company Name:</label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="companyForm.name"
+          name="name"
+          placeholder="Enter company name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="userLimit">User Limit:</label>
+        <input
+          type="number"
+          id="userLimit"
+          [(ngModel)]="companyForm.userLimit"
+          name="userLimit"
+          placeholder="Enter user limit"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="projectLimit">Project Limit:</label>
+        <input
+          type="number"
+          id="projectLimit"
+          [(ngModel)]="companyForm.projectLimit"
+          name="projectLimit"
+          placeholder="Enter project limit"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="activeUntil">Active Until:</label>
+        <input
+          type="date"
+          id="activeUntil"
+          [(ngModel)]="companyForm.activeUntil"
+          name="activeUntil"
+          required
+        />
+      </div>
+      <div class="form-actions">
+        <button type="submit">{{ isEdit ? 'Update Company' : 'Add Company' }}</button>
+        <button type="button" (click)="resetForm()">Reset</button>
+      </div>
+    </form>
+
+    <div class="company-list">
+      <h2>Company List</h2>
+      <div *ngFor="let company of companies" class="company-item">
+        <h3>{{ company.name }}</h3>
+        <p>User Limit: {{ company.userLimit }}</p>
+        <p>Project Limit: {{ company.projectLimit }}</p>
+        <p>Active Until: {{ company.activeUntil | date }}</p>
+        <div class="company-actions">
+          <button (click)="editCompany(company)">Edit</button>
+          <button (click)="deleteCompany(company.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>

@@ -1,7 +1,10 @@
+// src/app/services/company.service.ts
 // src/app/models/company.model.ts
-export class Company {
-  id: number | undefined;
-  name: string | undefined;
-  address: string | undefined;
-  industry: string | undefined;
+export interface Company {
+  id: number;
+  name: string;
+  userLimit: number;
+  projectLimit: number;
+  activeUntil: Date;
 }
+

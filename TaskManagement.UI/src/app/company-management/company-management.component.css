@@ -1,9 +1,92 @@
-/* src/app/company-management/company-management.component.css */
-.company-container {
-  padding: 20px;
-  background-color: #f5f5f5;
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-h1 {
-  color: #333;
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
+
+.dashboard-header {
+  background-color: #007bff;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashboard-content {
+  flex: 1; /* This allows the content to take the remaining space */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background for contrast */
+  overflow-y: auto; /* Enable scrolling for long content */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-actions {
+  margin-top: 15px;
+}
+
+button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+  button:hover {
+    background-color: #218838;
+  }
+
+.company-list {
+  margin-top: 20px;
+}
+
+.company-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: white; /* White background for the company items */
+}
+
+.company-actions {
+  margin-top: 10px;
+}
+
+.company-item h3 {
+  margin: 0;
+}
+
+.company-item button {
+  background-color: #dc3545;
+}
+
+  .company-item button:hover {
+    background-color: #c82333;
+  }

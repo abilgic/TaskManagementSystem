@@ -1,7 +1,7 @@
 // src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule if not already imported
 
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { CompanyManagementComponent } from './company-management/company-managem
   ],
   imports: [
     BrowserModule,
+    FormsModule,  // Add FormsModule here
     HttpClientModule, // Ensure HttpClientModule is imported
     ReactiveFormsModule, // Add ReactiveFormsModule here
     AppRoutingModule
