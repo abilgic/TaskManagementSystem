@@ -1,4 +1,3 @@
-<!-- src/app/login/login.component.html -->
 <div class="login-container">
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -16,7 +15,7 @@
         Password is required.
       </div>
     </div>
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div> <!-- Display the error message here -->
     <button type="submit" [disabled]="loginForm.invalid">Login</button>
   </form>
 </div>

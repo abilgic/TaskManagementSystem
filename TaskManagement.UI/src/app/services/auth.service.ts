@@ -12,18 +12,13 @@ export interface LoginRequest {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:1162/api/login'; // Adjust to your API URL
+  private apiUrl = 'http://localhost:1162/api/login/authenticate'; // Adjust to your API URL
 
   constructor(private http: HttpClient) { }
 
-  login(credentials: LoginRequest): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/authenticate`, credentials).pipe(
-      tap(response => {
-        if (response && response.token) {
-          this.storeToken(response.token);
-        }
-      })
-    );
+  // Ensure login accepts two arguments: username and password
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(this.apiUrl, { username, password });
   }
 
   private storeToken(token: string): void {

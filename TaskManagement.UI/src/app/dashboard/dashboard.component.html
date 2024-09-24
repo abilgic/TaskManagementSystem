@@ -1,0 +1,35 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <div class="header">
+    <h1>Dashboard</h1>
+  </div>
+
+  <div class="content">
+    <div class="sidebar">
+      <ul>
+        <li><a routerLink="/dashboard/overview">Overview</a></li>
+        <li><a routerLink="/dashboard/reports">Reports</a></li>
+        <li><a routerLink="/dashboard/settings">Settings</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="card-container">
+        <div class="card">
+          <h3>Total Users</h3>
+          <p>1,234</p>
+        </div>
+        <div class="card">
+          <h3>Active Orders</h3>
+          <p>45</p>
+        </div>
+        <div class="card">
+          <h3>Revenue</h3>
+          <p>$12,345</p>
+        </div>
+      </div>
+
+      <router-outlet></router-outlet> <!-- Placeholder for nested routes -->
+    </div>
+  </div>
+</div>

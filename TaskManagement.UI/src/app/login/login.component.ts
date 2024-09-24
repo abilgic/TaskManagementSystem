@@ -1,20 +1,25 @@
-// src/app/login/login.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { LoginRequest } from '../models/login.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  loginForm: FormGroup;
-  errorMessage: string | null = null;
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.loginForm = this.fb.group({
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
@@ -22,17 +27,19 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const loginRequest: LoginRequest = this.loginForm.value;
-      this.authService.login(loginRequest).subscribe(
-        response => {
-          // Handle successful login (store token, redirect, etc.)
-          console.log('Login successful', response);
+      const { username, password } = this.loginForm.value; // Destructure username and password
+
+      // Assuming the login method takes two parameters
+      this.authService.login(username, password).subscribe({
+        next: (response) => {
+          console.log('Login successful');
+          this.router.navigate(['/dashboard']); // Redirect to dashboard on successful login
         },
-        error => {
-          this.errorMessage = error.error || 'Login failed';
+        error: (error) => {
           console.error('Login failed', error);
+          this.errorMessage = 'Login failed. Please check your username and password.'; // Set error message on failure
         }
-      );
+      });
     }
   }
 }
