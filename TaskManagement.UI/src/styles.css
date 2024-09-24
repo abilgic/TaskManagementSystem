@@ -1,134 +1,106 @@
-/* src/app/login/login.component.css */
+/* src/styles.css or src/global.css */
+
+/* Reset and basic styles */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Ensure the body takes the full height */
-  font-family: 'Poppins', sans-serif; /* Modern font for a clean look */
+  height: 100%;
+  font-family: 'Poppins', sans-serif; /* Use a consistent font */
 }
 
+/* Login Page Styles */
 body {
-  display: flex; /* Enable flexbox on body */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  background: linear-gradient(135deg, #ff512f, #dd2476); /* Elegant red gradient */
-}
-
-.login-container {
-  max-width: 400px; /* Maximum width of the login form */
-  width: 100%; /* Allow the container to take full width up to max-width */
-  padding: 2rem; /* Padding around the content */
-  background: rgba(255, 255, 255, 0.95); /* Slightly transparent white background */
-  border-radius: 12px; /* Smooth rounded corners */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Elegant shadow for depth */
-  backdrop-filter: blur(10px); /* Glassmorphism effect */
-}
-
-h2 {
-  text-align: center; /* Center the title */
-  color: #333; /* Title color */
-  margin-bottom: 1.5rem; /* Space below the title */
-  font-size: 1.8rem; /* Slightly larger font size */
-}
-
-div {
-  margin-bottom: 1.5rem; /* Space between form elements */
-}
-
-label {
-  display: block; /* Block display for labels */
-  margin-bottom: 0.5rem; /* Space below labels */
-  color: #666; /* Label color */
-  font-size: 0.95rem; /* Slightly smaller text */
-}
-
-input {
-  width: 100%; /* Full width of the container */
-  padding: 0.75rem; /* Larger padding for input */
-  border: 1px solid #ccc; /* Light gray border */
-  border-radius: 6px; /* Softer rounded corners */
-  font-size: 1rem; /* Font size for input */
-  transition: border-color 0.3s; /* Smooth transition for border color */
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
-}
-
-  input:focus {
-    border-color: #ff512f; /* Change border color on focus */
-    outline: none; /* Remove default outline */
-  }
-
-button {
-  width: 100%; /* Full width of the button */
-  padding: 0.75rem; /* Padding inside the button */
-  background-color: #dd2476; /* Darker red background for button */
-  border: none; /* Remove default border */
-  border-radius: 6px; /* Softer rounded corners for button */
-  color: white; /* White text */
-  font-size: 1rem; /* Font size for button */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth transition for background color */
-}
-
-  button:disabled {
-    background-color: #ccc; /* Gray background for disabled state */
-    cursor: not-allowed; /* Not-allowed cursor when disabled */
-  }
-
-  button:hover:not(:disabled) {
-    background-color: #c2185b; /* Slightly darker red when hovered */
-  }
-
-.error {
-  color: red; /* Red color for error messages */
-  font-size: 0.875rem; /* Slightly smaller font size */
-  margin-top: -1rem; /* Adjust margin for spacing */
-}
-.dashboard-container {
-  background: var(--red-5);
-  color: white;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ff512f, #dd2476); /* Gradient for login page */
 }
 
+/* Dashboard Styles */
+.dashboard-container {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack header and main content vertically */
+  height: 100vh; /* Full height of the viewport */
+  background: linear-gradient(to bottom right, #d9d9d9, #b0b0b0); /* Gray gradient background */
+  position: relative; /* Ensure correct stacking context */
+}
+
+/* Header styles */
 .header {
-  background: var(--red-10);
-  padding: 20px;
-  font-size: 1.5rem;
-  text-align: center;
+  background: #6200ea; /* Header background color */
+  padding: 20px; /* Padding for header */
+  font-size: 1.5rem; /* Font size for header */
+  color: white; /* White text */
+  text-align: center; /* Center text */
 }
 
+/* Main dashboard area */
+.dashboard-main {
+  display: flex; /* Use flexbox for the main area */
+  flex: 1; /* Take the remaining space */
+}
+
+/* Sidebar styles */
 .sidebar {
-  background: var(--red-15);
-  width: 250px;
-  padding: 20px;
-  flex-shrink: 0;
+  background: #3700b3; /* Sidebar background color */
+  width: 250px; /* Fixed width for sidebar */
+  padding: 20px; /* Padding for sidebar */
+  color: white; /* Sidebar text color */
+  flex-shrink: 0; /* Prevent sidebar from shrinking */
 }
 
-.content {
-  background: var(--red-20);
-  flex: 1;
-  padding: 20px;
-}
-
-.card {
-  background: var(--red-25);
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-button {
-  background: var(--red-30);
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-  button:hover {
-    background: var(--red-35);
+  /* Navigation list styles */
+  .sidebar ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
   }
 
+  /* List item styles */
+  .sidebar li {
+    margin: 10px 0; /* Space between list items */
+  }
+
+  /* Link styles */
+  .sidebar a {
+    color: white; /* Link text color */
+    text-decoration: none; /* Remove underline from links */
+    padding: 10px; /* Add padding around links */
+    display: block; /* Make links fill the list items */
+    border-radius: 5px; /* Rounded corners for links */
+    transition: background 0.3s ease; /* Smooth transition for background */
+  }
+
+    /* Link hover effect */
+    .sidebar a:hover {
+      background: rgba(255, 255, 255, 0.2); /* Light background on hover */
+    }
+
+/* Main content area styles */
+.main-content {
+  flex: 1; /* Take the remaining space */
+  padding: 20px; /* Padding for content */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  background: white; /* White background for content area */
+  border-radius: 8px; /* Rounded corners for content area */
+}
+
+/* Card styles */
+.card {
+  background: #ffffff; /* Card background color */
+  padding: 20px; /* Padding for cards */
+  border-radius: 8px; /* Rounded corners */
+  margin-bottom: 20px; /* Space between cards */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Button styles */
+.button {
+  background-color: #6200ea; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background 0.3s ease; /* Smooth transition for background */
+}

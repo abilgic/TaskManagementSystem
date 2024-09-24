@@ -4,18 +4,18 @@
     <h1>Dashboard</h1>
   </div>
 
-  <div class="content">
+  <div class="dashboard-main">
     <div class="sidebar">
       <ul>
         <li><a routerLink="/dashboard/dashboard">Overview</a></li>
-        <li><a routerLink="/dashboard/companies">companies</a></li>
-        <li><a routerLink="/dashboard/settings" (click)="onLogout()">Logout</a></li>
-        
+        <li><a routerLink="/dashboard/companies">Companies</a></li>
+        <li><a routerLink="/dashboard/" (click)="onLogout()">Logout</a></li>
       </ul>
     </div>
 
     <div class="main-content">
-       <router-outlet></router-outlet> <!-- Placeholder for nested routes -->
+      <router-outlet></router-outlet> <!-- Placeholder for nested routes -->
     </div>
   </div>
 </div>
+
