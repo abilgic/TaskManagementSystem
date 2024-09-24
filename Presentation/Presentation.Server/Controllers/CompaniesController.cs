@@ -28,7 +28,8 @@ namespace TaskManagement.Server.Controllers
             var companies = await _companyService.GetAllAsync(); // Assuming this method exists
             return Ok(companies);
         }
-
+        
+        [HttpPost]
         public async Task<ActionResult<Company>> AddCompany([FromBody] CompanyDto companyDto)
         {
             if (companyDto == null)
