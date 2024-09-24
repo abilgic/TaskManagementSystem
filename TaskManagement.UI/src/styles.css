@@ -1,1 +1,84 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/app/login/login.component.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure the body takes the full height */
+  font-family: 'Poppins', sans-serif; /* Modern font for a clean look */
+}
+
+body {
+  display: flex; /* Enable flexbox on body */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background: linear-gradient(135deg, #ff512f, #dd2476); /* Elegant red gradient */
+}
+
+.login-container {
+  max-width: 400px; /* Maximum width of the login form */
+  width: 100%; /* Allow the container to take full width up to max-width */
+  padding: 2rem; /* Padding around the content */
+  background: rgba(255, 255, 255, 0.95); /* Slightly transparent white background */
+  border-radius: 12px; /* Smooth rounded corners */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Elegant shadow for depth */
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+}
+
+h2 {
+  text-align: center; /* Center the title */
+  color: #333; /* Title color */
+  margin-bottom: 1.5rem; /* Space below the title */
+  font-size: 1.8rem; /* Slightly larger font size */
+}
+
+div {
+  margin-bottom: 1.5rem; /* Space between form elements */
+}
+
+label {
+  display: block; /* Block display for labels */
+  margin-bottom: 0.5rem; /* Space below labels */
+  color: #666; /* Label color */
+  font-size: 0.95rem; /* Slightly smaller text */
+}
+
+input {
+  width: 100%; /* Full width of the container */
+  padding: 0.75rem; /* Larger padding for input */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 6px; /* Softer rounded corners */
+  font-size: 1rem; /* Font size for input */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+}
+
+  input:focus {
+    border-color: #ff512f; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+  }
+
+button {
+  width: 100%; /* Full width of the button */
+  padding: 0.75rem; /* Padding inside the button */
+  background-color: #dd2476; /* Darker red background for button */
+  border: none; /* Remove default border */
+  border-radius: 6px; /* Softer rounded corners for button */
+  color: white; /* White text */
+  font-size: 1rem; /* Font size for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+  button:disabled {
+    background-color: #ccc; /* Gray background for disabled state */
+    cursor: not-allowed; /* Not-allowed cursor when disabled */
+  }
+
+  button:hover:not(:disabled) {
+    background-color: #c2185b; /* Slightly darker red when hovered */
+  }
+
+.error {
+  color: red; /* Red color for error messages */
+  font-size: 0.875rem; /* Slightly smaller font size */
+  margin-top: -1rem; /* Adjust margin for spacing */
+}
