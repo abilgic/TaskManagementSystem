@@ -82,3 +82,53 @@ button {
   font-size: 0.875rem; /* Slightly smaller font size */
   margin-top: -1rem; /* Adjust margin for spacing */
 }
+.dashboard-container {
+  background: var(--red-5);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: var(--red-10);
+  padding: 20px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.sidebar {
+  background: var(--red-15);
+  width: 250px;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.content {
+  background: var(--red-20);
+  flex: 1;
+  padding: 20px;
+}
+
+.card {
+  background: var(--red-25);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background: var(--red-30);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+  button:hover {
+    background: var(--red-35);
+  }
+

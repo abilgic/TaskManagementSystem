@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyService } from '../services/company.service';
-import { Company } from '../models/company.model';
+import { NgForm } from '@angular/forms';
+
+interface Company {
+  id: number; // Make 'id' required
+  name: string;
+  userLimit: number;
+  projectLimit: number;
+  activeUntil: string; // Use string for compatibility
+}
 
 @Component({
   selector: 'app-company-management',
@@ -9,66 +16,58 @@ import { Company } from '../models/company.model';
 })
 export class CompanyManagementComponent implements OnInit {
   companies: Company[] = [];
-
-  // Ensure the companyForm matches the Company interface
-  companyForm: Company = {
-    id: 0, // Add id for clarity in the form
-    name: '',
-    userLimit: 0, // Ensure these are the correct types
-    projectLimit: 0,
-    activeUntil: new Date() // Default value as Date
-  };
-
+  companyForm: Company = { id: 0, name: '', userLimit: 0, projectLimit: 0, activeUntil: '' }; // Initialize id
   isEdit = false;
-  editingCompanyId: number | null = null;
+  editingCompanyId?: number;
 
-  constructor(private companyService: CompanyService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.loadCompanies();
+    // Initialization logic, e.g., fetching companies from a service
   }
 
-  loadCompanies() {
-    this.companyService.getCompanies().subscribe(data => {
-      this.companies = data;
-    });
-  }
-
-  onSubmit() {
+  onSubmit(): void {
     if (this.isEdit) {
-      this.companyService.updateCompany(this.editingCompanyId!, this.companyForm).subscribe(() => {
-        this.loadCompanies();
-        this.resetForm();
-      });
+      this.updateCompany();
     } else {
-      this.companyService.createCompany(this.companyForm).subscribe(() => {
-        this.loadCompanies();
-        this.resetForm();
-      });
+      this.addCompany();
     }
+    this.resetForm();
   }
 
-  editCompany(company: Company) {
+  addCompany(): void {
+    const newCompany: Company = { ...this.companyForm, id: Date.now() }; // Sample ID generation
+    this.companies.push(newCompany);
+  }
+
+  editCompany(company: Company): void {
     this.isEdit = true;
     this.editingCompanyId = company.id;
     this.companyForm = { ...company };
   }
 
-  deleteCompany(id: number) {
-    this.companyService.deleteCompany(id).subscribe(() => {
-      this.loadCompanies();
-    });
+  updateCompany(): void {
+    if (this.editingCompanyId === undefined) {
+      // Handle the case where editingCompanyId is undefined (optional)
+      return; // or throw an error, or whatever makes sense for your application
+    }
+
+    const index = this.companies.findIndex(company => company.id === this.editingCompanyId);
+    if (index !== -1) {
+      this.companies[index] = { ...this.companyForm, id: this.editingCompanyId }; // Keep the same ID
+    }
+    this.isEdit = false;
+    this.editingCompanyId = undefined;
   }
 
-  resetForm() {
+
+  deleteCompany(id: number): void {
+    this.companies = this.companies.filter(company => company.id !== id);
+  }
+
+  resetForm(): void {
+    this.companyForm = { id: 0, name: '', userLimit: 0, projectLimit: 0, activeUntil: '' }; // Reset form
     this.isEdit = false;
-    this.editingCompanyId = null;
-    this.companyForm = {
-      id: 0,
-      name: '',
-      userLimit: 0,
-      projectLimit: 0,
-      activeUntil: new Date() // Reset to today's date
-    };
+    this.editingCompanyId = undefined;
   }
 }

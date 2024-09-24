@@ -2,56 +2,30 @@
   <header class="dashboard-header">
     <h1>Company Management Dashboard</h1>
   </header>
-  
+
   <main class="dashboard-content">
-    <form #companyForm="ngForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="name">Company Name:</label>
-        <input
-          type="text"
-          id="name"
-          [(ngModel)]="companyForm.name"
-          name="name"
-          placeholder="Enter company name"
-          required
-        />
+    <form (ngSubmit)="onSubmit()" #companyFormDirective="ngForm">
+      <div>
+        <label for="name">Company Name</label>
+        <input type="text" id="name" [(ngModel)]="companyForm.name" name="name" required>
       </div>
-      <div class="form-group">
-        <label for="userLimit">User Limit:</label>
-        <input
-          type="number"
-          id="userLimit"
-          [(ngModel)]="companyForm.userLimit"
-          name="userLimit"
-          placeholder="Enter user limit"
-          required
-        />
+
+      <div>
+        <label for="userLimit">User Limit</label>
+        <input type="number" id="userLimit" [(ngModel)]="companyForm.userLimit" name="userLimit" required>
       </div>
-      <div class="form-group">
-        <label for="projectLimit">Project Limit:</label>
-        <input
-          type="number"
-          id="projectLimit"
-          [(ngModel)]="companyForm.projectLimit"
-          name="projectLimit"
-          placeholder="Enter project limit"
-          required
-        />
+
+      <div>
+        <label for="projectLimit">Project Limit</label>
+        <input type="number" id="projectLimit" [(ngModel)]="companyForm.projectLimit" name="projectLimit" required>
       </div>
-      <div class="form-group">
-        <label for="activeUntil">Active Until:</label>
-        <input
-          type="date"
-          id="activeUntil"
-          [(ngModel)]="companyForm.activeUntil"
-          name="activeUntil"
-          required
-        />
+
+      <div>
+        <label for="activeUntil">Active Until</label>
+        <input type="date" id="activeUntil" [(ngModel)]="companyForm.activeUntil" name="activeUntil" required>
       </div>
-      <div class="form-actions">
-        <button type="submit">{{ isEdit ? 'Update Company' : 'Add Company' }}</button>
-        <button type="button" (click)="resetForm()">Reset</button>
-      </div>
+
+      <button type="submit">Save</button>
     </form>
 
     <div class="company-list">
@@ -63,7 +37,7 @@
         <p>Active Until: {{ company.activeUntil | date }}</p>
         <div class="company-actions">
           <button (click)="editCompany(company)">Edit</button>
-          <button (click)="deleteCompany(company.id)">Delete</button>
+          <button *ngIf="company.id" (click)="deleteCompany(company.id)">Delete</button>
         </div>
       </div>
     </div>
